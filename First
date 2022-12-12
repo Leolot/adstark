@@ -1,0 +1,315 @@
+<script src="https://weblocks.io/library.js"></script>
+<script>
+var start, question_leistung, question_mitarbeiter, question_found, company, question_company, domain, question_data;
+
+
+var we_tabs_next_button = '[bloc=next-question]';
+    var we_tabs_prev_button = '[bloc=prev-question]';
+    var we_tabs_active_class = 'active';
+
+    var we_activeTab,we_indexOfActiveTab, we_indexOfNextTab, we_indexOfPrevTab, we_prevTab, we_amountOfTabs, nextTab;
+
+    var tabList = ['start'];
+
+    openTab(tabList[0]);
+
+    $(we_tabs_next_button).on("click", function () {
+      var activeTab = $(".w--tab-active").attr("data-w-tab");
+      var indexOfActiveTab = tabList.indexOf(activeTab);
+      var indexOfNextTab = indexOfActiveTab + 1;
+      var nextTab = tabList[indexOfNextTab];
+      var amountOfTabs = tabList.length;
+      var attrNextTab = $('.w--tab-active').attr('next-tab');
+
+      openTab(attrNextTab);
+
+      attrNextTab = $('.w--tab-active').attr('next-tab');
+
+      if (typeof attrNextTab !== 'undefined' && attrNextTab !== false) {
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+      } else {
+        $(we_tabs_next_button).removeClass(we_tabs_active_class);
+      }
+
+      if (amountOfTabs > 1) {
+        $(we_tabs_prev_button).addClass(we_tabs_active_class);
+      }
+    });
+
+    $(we_tabs_prev_button).on("click", function () {
+      var activeTab = $(".w--tab-active").attr("data-w-tab");
+      var indexOfActiveTab = tabList.indexOf(activeTab);
+      var indexOfPrevTab = indexOfActiveTab - 1;
+      var prevTab = tabList[indexOfPrevTab];
+
+      var attrPrevTab = $('.w--tab-active').attr('prev-tab');
+
+      if (indexOfActiveTab > 0) {
+        openTab(attrPrevTab);
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+      }
+
+      if (indexOfActiveTab <= 1) {
+        $(we_tabs_prev_button).removeClass(we_tabs_active_class);
+      } else {
+        $(we_tabs_prev_button).addClass(we_tabs_active_class);
+      }
+    });
+
+    function openTab(tab) {
+      var tab_link = "a[data-w-tab=" + tab;
+      tab = "div[data-w-tab=" + tab;
+
+      $(tab).siblings().removeClass("w--tab-active");
+      $(tab).addClass("w--tab-active");
+      $(tab_link).siblings("a").removeClass("w--current");
+      $(tab_link).addClass("w--current");
+    }if($('.w--tab-active').attr('data-w-tab')=='start') {
+
+      nextTab = 'question_leistung';
+      we_activeTab = $(".w--tab-active").attr("data-w-tab");
+      we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+      we_indexOfNextTab = we_indexOfActiveTab + 1;
+      we_indexOfPrevTab = we_indexOfActiveTab - 1;
+      we_prevTab = tabList[we_indexOfPrevTab];
+      we_amountOfTabs = tabList.length;
+
+      if (we_indexOfNextTab < we_amountOfTabs) {
+        tabList[we_indexOfNextTab] = nextTab;
+      } else {
+        tabList.push(nextTab);
+      }
+      $(we_tabs_next_button).addClass(we_tabs_active_class);
+      $(".w--tab-active").attr('next-tab',nextTab);
+      $($('[data-w-tab=question_leistung]')).attr('prev-tab',we_activeTab);
+
+
+    }$("[name=question_leistung]").on("input", function () {
+    question_leistung = getValueFromInput("question_leistung");
+
+      nextTab = 'question_mitarbeiter';
+      we_activeTab = $(".w--tab-active").attr("data-w-tab");
+      we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+      we_indexOfNextTab = we_indexOfActiveTab + 1;
+      we_indexOfPrevTab = we_indexOfActiveTab - 1;
+      we_prevTab = tabList[we_indexOfPrevTab];
+      we_amountOfTabs = tabList.length;
+
+      if (we_indexOfNextTab < we_amountOfTabs) {
+        tabList[we_indexOfNextTab] = nextTab;
+      } else {
+        tabList.push(nextTab);
+      }
+      $(we_tabs_next_button).addClass(we_tabs_active_class);
+      $(".w--tab-active").attr('next-tab',nextTab);
+      $($('[data-w-tab=question_mitarbeiter]')).attr('prev-tab',we_activeTab);
+
+      });
+
+    $("[name=question_leistung]").parent("label.w-radio").on("click", function () {
+      clickedRadioButtonValue = $("input", this).val();
+      question_leistung = getValueFromInput("question_leistung");
+
+      nextTab = 'question_mitarbeiter';
+      we_activeTab = $(".w--tab-active").attr("data-w-tab");
+      we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+      we_indexOfNextTab = we_indexOfActiveTab + 1;
+      we_indexOfPrevTab = we_indexOfActiveTab - 1;
+      we_prevTab = tabList[we_indexOfPrevTab];
+      we_amountOfTabs = tabList.length;
+
+      if (we_indexOfNextTab < we_amountOfTabs) {
+        tabList[we_indexOfNextTab] = nextTab;
+      } else {
+        tabList.push(nextTab);
+      }
+      $(we_tabs_next_button).addClass(we_tabs_active_class);
+      $(".w--tab-active").attr('next-tab',nextTab);
+      $($('[data-w-tab=question_mitarbeiter]')).attr('prev-tab',we_activeTab);
+
+      });
+    $("[name=question_mitarbeiter]").on("input", function () {
+    question_mitarbeiter = getValueFromInput("question_mitarbeiter");
+
+      nextTab = 'question_found';
+      we_activeTab = $(".w--tab-active").attr("data-w-tab");
+      we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+      we_indexOfNextTab = we_indexOfActiveTab + 1;
+      we_indexOfPrevTab = we_indexOfActiveTab - 1;
+      we_prevTab = tabList[we_indexOfPrevTab];
+      we_amountOfTabs = tabList.length;
+
+      if (we_indexOfNextTab < we_amountOfTabs) {
+        tabList[we_indexOfNextTab] = nextTab;
+      } else {
+        tabList.push(nextTab);
+      }
+      $(we_tabs_next_button).addClass(we_tabs_active_class);
+      $(".w--tab-active").attr('next-tab',nextTab);
+      $($('[data-w-tab=question_found]')).attr('prev-tab',we_activeTab);
+
+      });
+
+    $("[name=question_mitarbeiter]").parent("label.w-radio").on("click", function () {
+      clickedRadioButtonValue = $("input", this).val();
+      question_mitarbeiter = getValueFromInput("question_mitarbeiter");
+
+      nextTab = 'question_found';
+      we_activeTab = $(".w--tab-active").attr("data-w-tab");
+      we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+      we_indexOfNextTab = we_indexOfActiveTab + 1;
+      we_indexOfPrevTab = we_indexOfActiveTab - 1;
+      we_prevTab = tabList[we_indexOfPrevTab];
+      we_amountOfTabs = tabList.length;
+
+      if (we_indexOfNextTab < we_amountOfTabs) {
+        tabList[we_indexOfNextTab] = nextTab;
+      } else {
+        tabList.push(nextTab);
+      }
+      $(we_tabs_next_button).addClass(we_tabs_active_class);
+      $(".w--tab-active").attr('next-tab',nextTab);
+      $($('[data-w-tab=question_found]')).attr('prev-tab',we_activeTab);
+
+      });
+    $("[name=question_found]").on("input", function () {
+    question_found = getValueFromInput("question_found");
+
+      nextTab = 'question_company';
+      we_activeTab = $(".w--tab-active").attr("data-w-tab");
+      we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+      we_indexOfNextTab = we_indexOfActiveTab + 1;
+      we_indexOfPrevTab = we_indexOfActiveTab - 1;
+      we_prevTab = tabList[we_indexOfPrevTab];
+      we_amountOfTabs = tabList.length;
+
+      if (we_indexOfNextTab < we_amountOfTabs) {
+        tabList[we_indexOfNextTab] = nextTab;
+      } else {
+        tabList.push(nextTab);
+      }
+      $(we_tabs_next_button).addClass(we_tabs_active_class);
+      $(".w--tab-active").attr('next-tab',nextTab);
+      $($('[data-w-tab=question_company]')).attr('prev-tab',we_activeTab);
+
+      });
+
+    $("[name=question_found]").parent("label.w-radio").on("click", function () {
+      clickedRadioButtonValue = $("input", this).val();
+      question_found = getValueFromInput("question_found");
+
+      nextTab = 'question_company';
+      we_activeTab = $(".w--tab-active").attr("data-w-tab");
+      we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+      we_indexOfNextTab = we_indexOfActiveTab + 1;
+      we_indexOfPrevTab = we_indexOfActiveTab - 1;
+      we_prevTab = tabList[we_indexOfPrevTab];
+      we_amountOfTabs = tabList.length;
+
+      if (we_indexOfNextTab < we_amountOfTabs) {
+        tabList[we_indexOfNextTab] = nextTab;
+      } else {
+        tabList.push(nextTab);
+      }
+      $(we_tabs_next_button).addClass(we_tabs_active_class);
+      $(".w--tab-active").attr('next-tab',nextTab);
+      $($('[data-w-tab=question_company]')).attr('prev-tab',we_activeTab);
+
+      });
+    $("[name=company]").on("input", function () {
+    company = getValueFromInput("company");
+      if (company == null && domain == null) {
+
+        nextTab = 'question_data';
+        we_activeTab = $(".w--tab-active").attr("data-w-tab");
+        we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+        we_indexOfNextTab = we_indexOfActiveTab + 1;
+        we_indexOfPrevTab = we_indexOfActiveTab - 1;
+        we_prevTab = tabList[we_indexOfPrevTab];
+        we_amountOfTabs = tabList.length;
+
+        if (we_indexOfNextTab < we_amountOfTabs) {
+          tabList[we_indexOfNextTab] = nextTab;
+        } else {
+          tabList.push(nextTab);
+        }
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+        $(".w--tab-active").attr('next-tab',nextTab);
+        $($('[data-w-tab=question_data]')).attr('prev-tab',we_activeTab);
+
+        }
+});
+
+    $("[name=company]").parent("label.w-radio").on("click", function () {
+      clickedRadioButtonValue = $("input", this).val();
+      company = getValueFromInput("company");
+        if (company == null && domain == null) {
+
+        nextTab = 'question_data';
+        we_activeTab = $(".w--tab-active").attr("data-w-tab");
+        we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+        we_indexOfNextTab = we_indexOfActiveTab + 1;
+        we_indexOfPrevTab = we_indexOfActiveTab - 1;
+        we_prevTab = tabList[we_indexOfPrevTab];
+        we_amountOfTabs = tabList.length;
+
+        if (we_indexOfNextTab < we_amountOfTabs) {
+          tabList[we_indexOfNextTab] = nextTab;
+        } else {
+          tabList.push(nextTab);
+        }
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+        $(".w--tab-active").attr('next-tab',nextTab);
+        $($('[data-w-tab=question_data]')).attr('prev-tab',we_activeTab);
+
+        }
+});
+    $("[name=domain]").on("input", function () {
+    domain = getValueFromInput("domain");
+      if (company == null && domain == null) {
+
+        nextTab = 'question_data';
+        we_activeTab = $(".w--tab-active").attr("data-w-tab");
+        we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+        we_indexOfNextTab = we_indexOfActiveTab + 1;
+        we_indexOfPrevTab = we_indexOfActiveTab - 1;
+        we_prevTab = tabList[we_indexOfPrevTab];
+        we_amountOfTabs = tabList.length;
+
+        if (we_indexOfNextTab < we_amountOfTabs) {
+          tabList[we_indexOfNextTab] = nextTab;
+        } else {
+          tabList.push(nextTab);
+        }
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+        $(".w--tab-active").attr('next-tab',nextTab);
+        $($('[data-w-tab=question_data]')).attr('prev-tab',we_activeTab);
+
+        }
+});
+
+    $("[name=domain]").parent("label.w-radio").on("click", function () {
+      clickedRadioButtonValue = $("input", this).val();
+      domain = getValueFromInput("domain");
+        if (company == null && domain == null) {
+
+        nextTab = 'question_data';
+        we_activeTab = $(".w--tab-active").attr("data-w-tab");
+        we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+        we_indexOfNextTab = we_indexOfActiveTab + 1;
+        we_indexOfPrevTab = we_indexOfActiveTab - 1;
+        we_prevTab = tabList[we_indexOfPrevTab];
+        we_amountOfTabs = tabList.length;
+
+        if (we_indexOfNextTab < we_amountOfTabs) {
+          tabList[we_indexOfNextTab] = nextTab;
+        } else {
+          tabList.push(nextTab);
+        }
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+        $(".w--tab-active").attr('next-tab',nextTab);
+        $($('[data-w-tab=question_data]')).attr('prev-tab',we_activeTab);
+
+        }
+});
+</script>
